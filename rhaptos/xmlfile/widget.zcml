@@ -1,0 +1,28 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="plone.app.textfield">
+
+    <class class=".widget.XMLTextWidget">
+        <require
+            permission="zope.Public"
+            interface=".widget.IXMLTextWidget"
+        />
+    </class>
+
+    <z3c:widgetTemplate
+        mode="display"
+        widget=".widget.IXMLTextWidget"
+        layer="z3c.form.interfaces.IFormLayer"
+        template="widget_display.pt"
+        />
+    
+    <z3c:widgetTemplate
+        mode="input"
+        widget=".widget.IXMLTextWidget"
+        layer="z3c.form.interfaces.IFormLayer"
+        template="widget_input.pt"
+        />
+
+</configure>
