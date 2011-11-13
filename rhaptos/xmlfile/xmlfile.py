@@ -1,4 +1,5 @@
 from zope import schema
+from zope.interface import implements
 
 from plone.directives import form
 from plone.app.textfield import RichText
@@ -13,6 +14,9 @@ class IXMLText(IRichText):
 class XMLText(RichText):
     """ Field that contains XML
     """
+
+    implements(IXMLText)
+    
     default_mime_type='text/xml',
     output_mime_type='text/xml', 
 
