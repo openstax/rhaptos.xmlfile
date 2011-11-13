@@ -40,11 +40,10 @@ class XMLText(RichText):
             )
 
     def _validate(self, value):
-        xml = '<?xml version="1.0"?>' + value.output
         try:
-            parseString(xml)
+            parseString(value.output)
         except ExpatError:
-            raise InvalidXML(xml)
+            raise InvalidXML(value.output)
         
 
 class IXMLFile(form.Schema):
