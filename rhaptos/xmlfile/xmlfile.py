@@ -1,3 +1,6 @@
+from xml.dom.minidom import parseString
+from xml.parsers.expat import ExpatError
+
 from zope import schema
 from zope.interface import implements
 
@@ -10,6 +13,9 @@ from rhaptos.xmlfile import MessageFactory as _
 class IXMLText(IRichText):
     """ Marker interface for IXMLText
     """
+
+class InvalidXML(schema.ValidationError):
+    __doc__ = _("""Invalid XML.""")
 
 class XMLText(RichText):
     """ Field that contains XML
@@ -32,6 +38,14 @@ class XMLText(RichText):
             allowed_mime_types=allowed_mime_types,
             schema=schema, **kw
             )
+
+    def _validate(self, value):
+        xml = '<?xml version="1.0"?>' + value.output
+        try:
+            parseString(xml)
+        except ExpatError:
+            raise InvalidXML(xml)
+        
 
 class IXMLFile(form.Schema):
     """
