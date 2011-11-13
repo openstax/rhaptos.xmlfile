@@ -20,30 +20,6 @@
                      onkeydown view/onkeydown;
                      onkeyup view/onkeyup">
 
-    <tal:define define="fieldName view/name;
-                        mimeType view/value/mimeType | view/field/default_mime_type;
-                        allowedMimeTypes view/allowedMimeTypes">
-
-        <div class="fieldTextFormat" tal:condition="python: len(allowedMimeTypes) > 1">
-            <label i18n:translate="label_text_format">Text Format</label>
-
-            <select tal:attributes="id   string:${fieldName}_text_format;
-                                    name string:${fieldName}.mimeType;">
-                <option selected=""
-                    tal:repeat="item allowedMimeTypes"
-                    tal:attributes="selected python:item == mimeType and 'selected' or None;
-                                    value item;"
-                    tal:content="item" />
-            </select>
-        </div>
-
-        <tal:hidden condition="python: len(allowedMimeTypes) == 1">
-            <input type="hidden" tal:attributes="id string:${fieldName}_text_format;
-                                                 name string:${fieldName}.mimeType;
-                                                 value python:allowedMimeTypes[0]"/>
-        </tal:hidden>
-    </tal:define>
-
     <tal:editor define="context            view/wrapped_context;
                         here               nocall:context;
                         portal_url         nocall:context/portal_url;
@@ -53,8 +29,9 @@
                         here_url           request/getURL;
                         tabindex           nothing;
                         rows               python:view.rows or 25;
-                        cols               python:view.cols or 80">
-        <div metal:use-macro="context/xml_wysiwyg_support/macros/wysiwygEditorBox">
+                        cols               python:view.cols or 80;
+                        title              view/title">
+        <div metal:use-macro="context/@@xml_wysiwyg_support/wysiwygEditorBox">
             The WYSIWYG code
         </div>
     </tal:editor>
