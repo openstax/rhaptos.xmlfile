@@ -8,6 +8,8 @@ from z3c.form.widget import FieldWidget
 from plone.app.textfield.widget import IRichTextWidget
 from plone.app.textfield.widget import RichTextWidget
 
+from rhaptos.xmlfile.xmlfile import IXMLText
+
 class IXMLTextWidget(IRichTextWidget):
     """ Marker interface for XMLTextWidget
     """
