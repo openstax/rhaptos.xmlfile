@@ -4,6 +4,13 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="plone.app.textfield">
 
+
+    <include package="z3c.form" file="meta.zcml" />
+    <include package="z3c.form" />
+
+    <adapter factory=".widget.XMLTextFieldWidget" />
+    <adapter factory=".widget.XMLTextConverter" />
+
     <class class=".widget.XMLTextWidget">
         <require
             permission="zope.Public"
@@ -23,6 +30,13 @@
         widget=".widget.IXMLTextWidget"
         layer="z3c.form.interfaces.IFormLayer"
         template="widget_input.pt"
+        />
+
+    <browser:page
+        for="*"
+        name="xml_wysiwyg_support"
+        template="xmlfile_templates/nowysiwyg.pt"
+        permission="cmf.ModifyPortalContent"
         />
 
 </configure>
