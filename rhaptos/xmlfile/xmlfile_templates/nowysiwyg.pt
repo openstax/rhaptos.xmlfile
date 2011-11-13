@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<body>
+    <div metal:define-macro="wysiwygEditorBox">
+        <textarea cols="80"
+                rows="25"
+                name="description"
+                tal:content="inputvalue"
+                tal:attributes="name inputname;
+                                id inputname;
+                                rows rows;
+                                cols cols;
+                                title title"></textarea>
+    </div>
+</body>
+</html>
