@@ -13,6 +13,6 @@
                       onmouseout view/onmouseout;
                       onkeypress view/onkeypress;
                       onkeydown view/onkeydown;
-                      onkeyup view/onkeyup"><tal:block
-      define="value view/value" condition="nocall:value" content="python:value.output"
+                      onkeyup view/onkeyup"><pre 
+      tal:define="value view/value" tal:condition="nocall:value" tal:content="view/prettyprint"
 /></div>

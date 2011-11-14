@@ -1,3 +1,4 @@
+from xml.dom.minidom import parseString
 from zope.interface import implementsOnly, implementer
 from zope.component import adapts, adapter
 
@@ -24,6 +25,10 @@ class XMLTextWidget(RichTextWidget):
     def update(self):
         super(RichTextWidget, self).update()
         addFieldClass(self)
+
+    def prettyprint(self):
+        dom = parseString(self.value.output)
+        return dom.toprettyxml()
     
 
 @adapter(IXMLText, IFormLayer)
