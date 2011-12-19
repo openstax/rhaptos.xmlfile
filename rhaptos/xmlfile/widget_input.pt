@@ -20,6 +20,17 @@
                      onkeydown view/onkeydown;
                      onkeyup view/onkeyup">
 
+    <tal:define define="fieldName view/name;
+                        mimeType view/value/mimeType | view/field/default_mime_type;">
+    <div class="fieldTextFormat">
+        <label i18n:translate="label_text_format">XML Format</label>
+
+        <input type="text" tal:attributes="id string:${fieldName}_text_format;
+                                           name string:${fieldName}.mimeType;
+                                           value mimeType"/>
+    </div>
+    </tal:define>
+
     <tal:editor define="context            view/wrapped_context;
                         here               nocall:context;
                         portal_url         nocall:context/portal_url;
