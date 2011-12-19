@@ -24,11 +24,11 @@ class XMLText(RichText):
     implements(IXMLText)
     
     default_mime_type='text/xml',
-    output_mime_type='text/xml', 
+    output_mime_type='text/html', 
 
     def __init__(self,
         default_mime_type='text/xml',
-        output_mime_type='text/xml', 
+        output_mime_type='text/html', 
         allowed_mime_types=None,
         schema=IRichTextValue,
         **kw):
@@ -55,5 +55,4 @@ class IXMLFile(form.Schema):
             title=_(u"Body"),
             required=False,
         )
-    
 
