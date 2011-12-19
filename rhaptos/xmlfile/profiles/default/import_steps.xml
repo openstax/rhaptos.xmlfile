@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<import-steps>
+    <import-step id="rhaptos.xmlfile" version="20111219-01"
+                handler="rhaptos.xmlfile.setuphandlers.install"
+                title="rhaptos.xmlfile">
+        <dependency step="componentregistry"/>
+        rhaptos.xmlfile installation step.
+    </import-step>
+</import-steps>
