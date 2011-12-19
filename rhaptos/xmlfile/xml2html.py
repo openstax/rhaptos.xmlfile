@@ -1,3 +1,4 @@
+from cgi import escape
 from lxml import etree
 
 from zope.interface import implements
@@ -17,7 +18,8 @@ class xml_to_html:
 
     def convert(self, orig, data, **kwargs):
         xmldoc = etree.fromstring(orig)
-        html = "<pre>%s</pre>" % etree.tostring(xmldoc, pretty_print=True)
+        html = etree.tostring(xmldoc, pretty_print=True)
+        html = "<pre>%s</pre>" % escape(html)
 
         data.setData(html)
         return data
