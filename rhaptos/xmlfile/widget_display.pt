@@ -13,6 +13,6 @@
                       onmouseout view/onmouseout;
                       onkeypress view/onkeypress;
                       onkeydown view/onkeydown;
-                      onkeyup view/onkeyup"><pre 
-      tal:define="value view/value" tal:condition="nocall:value" tal:content="view/prettyprint"
+                      onkeyup view/onkeyup">
+    <div tal:define="value view/value" tal:condition="nocall:value" tal:replace="structure view/html"
 /></div>
