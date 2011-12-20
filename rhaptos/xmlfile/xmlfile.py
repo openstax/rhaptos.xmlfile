@@ -5,6 +5,7 @@ from zope import schema
 from zope.interface import implements
 from zope.app.component.hooks import getSite
 
+from five import grok
 from plone.directives import form
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import IRichText, IRichTextValue
@@ -63,3 +64,6 @@ class IXMLFile(form.Schema):
             required=False,
         )
 
+class View(form.DisplayForm):
+    grok.context(IXMLFile)
+    grok.require('zope2.View')
