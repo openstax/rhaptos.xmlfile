@@ -47,6 +47,15 @@ class XMLTextValue(RichTextValue):
             else:
                 node.addnext(value)
         self._updateFromTree(tree)
+
+    @property
+    def processingInstruction(self):
+        tree = etree.fromstring(self.raw_encoded).getroottree()
+        docinfo = tree.docinfo
+        pi = '<?xml version="%s" encoding="%s"?>' % (docinfo.xml_version,
+                                                     docinfo.encoding)
+        return pi
+        
         
     def __repr__(self):
         return u"XMLTextValue object. (Did you mean <attribute>.raw or <attribute>.output?)"
