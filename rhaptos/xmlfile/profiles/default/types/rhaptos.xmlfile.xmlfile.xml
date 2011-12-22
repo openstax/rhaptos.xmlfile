@@ -4,7 +4,7 @@
    i18n:domain="rhaptos.xmlfile" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">XMLFile</property>
+  <property name="title" i18n:translate="">XML File</property>
   <property name="description"
     i18n:translate="">XML File</property>
   <property name="icon_expr">string:${portal_url}/document_icon.png</property>
