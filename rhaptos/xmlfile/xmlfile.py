@@ -46,6 +46,7 @@ class IXMLFile(form.Schema):
     XML File
     """
 
+    form.primary('body')
     body = XMLText(
             title=_(u"Body"),
             required=False,
