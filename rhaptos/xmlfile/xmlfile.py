@@ -7,8 +7,9 @@ from five import grok
 from plone.directives import form
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import IRichText
+from plone.app.textfield.utils import getSiteEncoding
 
-from rhaptos.xmlfile.value import IXMLTextValue
+from rhaptos.xmlfile.value import IXMLTextValue, XMLTextValue
 from rhaptos.xmlfile import MessageFactory as _
 
 class IXMLText(IRichText):
@@ -37,6 +38,14 @@ class XMLText(RichText):
             schema=schema, **kw
             )
 
+    def fromUnicode(self, str):
+        return XMLTextValue(
+                raw=str,
+                mimeType=self.default_mime_type,
+                outputMimeType=self.output_mime_type,
+                encoding=getSiteEncoding(),
+            )
+        
     def _validate(self, value):
         # lxml will raise an exception if we have invalid xml
         etree.fromstring(value.raw_encoded)
