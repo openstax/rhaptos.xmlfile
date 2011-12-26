@@ -27,6 +27,7 @@ class TestMarshaler(unittest.TestCase):
     def test_encode(self):
         self.assertEqual(self.marshaler.encode(self.xmltextvalue),
                          self.raw.encode('utf-8'))
+        self.assertEqual(self.marshaler.encode(), None)
         with self.assertRaises(UnicodeEncodeError):
             self.marshaler.encode(self.xmltextvalue, charset='latin-1')
 

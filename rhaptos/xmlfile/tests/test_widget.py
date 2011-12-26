@@ -8,7 +8,7 @@ from z3c.form.widget import FieldWidget
 from Products.CMFCore.PortalContent import PortalContent
 from rhaptos.xmlfile.widget import XMLTextWidget, XMLTextConverter
 from rhaptos.xmlfile.xmlfile import XMLText
-from rhaptos.xmlfile.value import XMLTextValue
+from rhaptos.xmlfile.value import IXMLTextValue, XMLTextValue
 
 from base import INTEGRATION_TESTING
 
@@ -64,7 +64,6 @@ class TestXMLTextWidget(unittest.TestCase):
         widget.update()
         self.assertEquals(widget.html(), '<pre>&lt;html&gt;\n  &lt;body&gt;test&lt;/body&gt;\n&lt;/html&gt;\n</pre>')
 
-
     def test_converter(self):
         _marker = object()
 
@@ -78,4 +77,14 @@ class TestXMLTextWidget(unittest.TestCase):
         converter = XMLTextConverter(IWithText['text'], widget)
         self.assertTrue(converter.toFieldValue(u'') is _marker)
         self.assertTrue(converter.toFieldValue(XMLTextValue(u'')) is _marker)
-    
+
+        self.assertEquals(converter.toWidgetValue(None), None)
+        self.assertTrue(IXMLTextValue.providedBy(
+            converter.toWidgetValue(XMLTextValue(u''))))
+        self.request.form['%s' % widget.name] = u"<html><body>test</body></html>"
+        self.request.form['%s.mimeType' % widget.name] = 'text/xml'
+        widget.update()
+        self.assertTrue(IXMLTextValue.providedBy(
+            converter.toWidgetValue(u"<html><body>test</body></html>")))
+        with self.assertRaises(ValueError):
+            converter.toWidgetValue(int)
