@@ -12,7 +12,6 @@ class TestCase(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         import rhaptos.xmlfile
         self.loadZCML(package=rhaptos.xmlfile)
-        z2.installProduct(app, PROJECTNAME)
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, '%s:default' % PROJECTNAME)
