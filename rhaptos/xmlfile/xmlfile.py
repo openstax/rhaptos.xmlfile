@@ -73,8 +73,9 @@ class View(form.DisplayForm):
 def searchableIndexer(context):
     transforms = getToolByName(context, 'portal_transforms')
     if context.body:
-        html = context.body.raw
+        html = context.body.raw_encoded
         text = transforms.convert('html_to_text', html).getData()
+        text = text.decode(getSiteEncoding())
     else:
         text = ''
 
