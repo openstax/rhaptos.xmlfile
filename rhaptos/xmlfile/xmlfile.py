@@ -1,3 +1,4 @@
+from cStringIO import StringIO
 from lxml import etree
 
 from zope import schema
@@ -48,7 +49,8 @@ class XMLText(RichText):
         
     def _validate(self, value):
         # lxml will raise an exception if we have invalid xml
-        etree.fromstring(value.raw_encoded)
+        parser = etree.XMLParser(resolve_entities=False)
+        etree.parse(StringIO(value.raw_encoded), parser)
 
 class IXMLFile(form.Schema):
     """
