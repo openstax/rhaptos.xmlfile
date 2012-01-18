@@ -9,6 +9,9 @@ from plone.directives import form
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import IRichText
 from plone.app.textfield.utils import getSiteEncoding
+from plone.indexer.decorator import indexer
+
+from Products.CMFCore.utils import getToolByName
 
 from rhaptos.xmlfile.value import IXMLTextValue, XMLTextValue
 from rhaptos.xmlfile import MessageFactory as _
@@ -66,3 +69,17 @@ class IXMLFile(form.Schema):
 class View(form.DisplayForm):
     grok.context(IXMLFile)
     grok.require('zope2.View')
+
+
+@indexer(IXMLFile)
+def searchableIndexer(context):
+    transforms = getToolByName(context, 'portal_transforms')
+    if context.body:
+        html = context.body.raw_encoded
+        text = transforms.convert('html_to_text', html).getData()
+        text = text.decode(getSiteEncoding())
+    else:
+        text = ''
+
+    return "%s %s %s" % (context.title, context.description, text)
+grok.global_adapter(searchableIndexer, name="SearchableText")
